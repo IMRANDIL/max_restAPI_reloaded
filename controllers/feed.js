@@ -203,6 +203,53 @@ exports.editPost = async (req, res, next) => {
 
 
 
+//delete post....
+
+
+exports.deletePost = async (req, res, next) => {
+    try {
+        const { postId } = req.params;
+
+        const post = await Post.findById(postId);
+
+        //check logged in user....when we will authenticate the user......so using...findById..else we should use findById and remove method....
+
+        if (!post) {
+            const error = new Error('Could not find post.');
+            error.statusCode = 404;
+            throw error;
+        }
+
+
+
+        clearImage(post.imageUrl)
+
+        const deletedpost = await Post.findByIdAndRemove(postId);
+
+        console.log(deletedpost);
+        res.status(200).json({ message: 'deleted post' })
+
+
+    } catch (error) {
+        if (!error.statusCode) {
+            error.statusCode = 500;
+
+        }
+
+        next(error)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 const clearImage = (filePath) => {
     filePath = path.join(__dirname, '..', filePath);
