@@ -44,13 +44,22 @@ exports.createPost = async (req, res, next) => {
 
         }
 
+        if (!req.file) {
+            const error = new Error('No image porvided.');
+            error.statusCode = 422;
+            throw error;
+        }
+
+
+        const imageUrl = req.file.path;
+
         const { title, content } = req.body;
 
         //create post in db...
 
 
         const post = new Post({
-            title: title, content: content, imageUrl: 'images/img1.png', creator: { name: 'ali' },
+            title: title, content: content, imageUrl: imageUrl, creator: { name: 'ali' },
         });
 
 
