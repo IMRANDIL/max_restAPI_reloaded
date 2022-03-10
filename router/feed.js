@@ -1,4 +1,4 @@
-const { getPosts, createPost } = require('../controllers/feed');
+const { getPosts, createPost, getPost } = require('../controllers/feed');
 const { body } = require('express-validator')
 
 const router = require('express').Router();
@@ -19,7 +19,9 @@ router.post('/post', [
 
 
 
+//get single post....
 
+router.get('/post/:postId', getPost)
 
 
 
