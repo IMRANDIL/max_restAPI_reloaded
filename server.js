@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 
 const cors = require('cors')
 const router = require('./router/feed');
+const userRouter = require('./router/user')
 
 const multer = require('multer')
 
@@ -52,7 +53,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/feed', router)
 
 
-
+app.use('/user', userRouter)
 
 
 
