@@ -1,4 +1,4 @@
-const { postSignup } = require('../controllers/user');
+const { postSignup, postLogin } = require('../controllers/user');
 const { body } = require('express-validator')
 
 const router = require('express').Router();
@@ -22,7 +22,9 @@ router.put('/signup', [
 
 
 
+//login....
 
+router.post('/login', postLogin)
 
 
 
