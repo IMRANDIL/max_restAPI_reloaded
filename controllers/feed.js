@@ -206,6 +206,14 @@ exports.editPost = async (req, res, next) => {
             throw error;
         }
 
+        if (post.creator.toString() !== req.userId) {
+
+            const error = new Error('Not authorized');
+            error.statusCode = 403;
+            throw error;
+
+        }
+
 
 
         if (imageUrl !== post.imageUrl) {
@@ -252,6 +260,21 @@ exports.deletePost = async (req, res, next) => {
             error.statusCode = 404;
             throw error;
         }
+
+        //checking the specific user post...
+
+        if (post.creator.toString() !== req.userId) {
+
+            const error = new Error('Not authorized');
+            error.statusCode = 403;
+            throw error;
+
+        }
+
+
+
+
+
 
 
 
