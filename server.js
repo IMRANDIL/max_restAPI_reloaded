@@ -99,9 +99,19 @@ const PORT = process.env.PORT || 3000;
 //database connection....
 
 mongoose.connect(process.env.URI).then(() => {
-    app.listen(PORT, () => {
+    const server = app.listen(PORT, () => {
         console.log(`server is running on port: ${PORT}😄`);
+
+    });
+
+
+    const io = require('socket.io')(server);
+
+    io.on('connection', socket => {
+        console.log('client connected');
     })
+
+
 }).catch((err) => console.log(err))
 
 
